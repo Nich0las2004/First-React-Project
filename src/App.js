@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'
+import UserInput from './components/UserInput/UserInput';
 
-function App() {
+const App = () => {
+  const [newName, setNewName] = useState("")
+  const [newAge, setNewAge] = useState("")
+
+  const getData = (name, age) => {
+    setNewName(name)
+    setNewAge(age)
+  }
+
+  const notEmpty = newName.length > 0 && newAge !== ""
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UserInput onBtnSubmit={getData} />
+      
+      <div className="all">
+        <div className="container">
+          <div className="output">
+            {notEmpty && <p>{newName} ({newAge})</p>}
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
